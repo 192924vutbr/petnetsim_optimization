@@ -1,35 +1,34 @@
-from petnetsim import PetriNet
-from petnetsim.elements import *
+import petnetsim_opt as pns
 from petnetsim.json_io import loads, dumps
 from pprint import pprint
 from itertools import chain
 import json
 
-ctx = new_context()
+ctx = pns.new_context()
 
-unnamed_place_1 = Place(init_tokens=5, context=ctx)
-unnamed_place_2 = Place(init_tokens=10, context=ctx)
-unnamed_place_3 = Place(init_tokens=5, context=ctx)
-unnamed_place_4 = Place(init_tokens=3, context=ctx)
-unnamed_place_5 = Place(context=ctx)
-unnamed_place_6 = Place(context=ctx)
+unnamed_place_1 = pns.Place(init_tokens=5, context=ctx)
+unnamed_place_2 = pns.Place(init_tokens=10, context=ctx)
+unnamed_place_3 = pns.Place(init_tokens=5, context=ctx)
+unnamed_place_4 = pns.Place(init_tokens=3, context=ctx)
+unnamed_place_5 = pns.Place(context=ctx)
+unnamed_place_6 = pns.Place(context=ctx)
 
-unnamed_transition_1 = TransitionPriority(name=None, priority=1, context=ctx)
-unnamed_transition_2 = TransitionPriority(name=None, priority=2, context=ctx)
-unnamed_transition_3 = TransitionStochastic(name=None, probability=0.7, context=ctx)
-unnamed_transition_4 = TransitionTimed(name=None, t_min=2, context=ctx)
-unnamed_transition_5 = TransitionTimed(name=None, t_min=1, t_max=3, p_distribution_func=uniform_distribution, context=ctx)
-unnamed_transition_6 = Transition(name=None, context=ctx)
-unnamed_transition_7 = Transition(name=None, context=ctx)
+unnamed_transition_1 = pns.TransitionPriority(name=None, priority=1, context=ctx)
+unnamed_transition_2 = pns.TransitionPriority(name=None, priority=2, context=ctx)
+unnamed_transition_3 = pns.TransitionStochastic(name=None, probability=0.7, context=ctx)
+unnamed_transition_4 = pns.TransitionTimed(name=None, t_min=2, context=ctx)
+unnamed_transition_5 = pns.TransitionTimed(name=None, t_min=1, t_max=3, p_distribution_func=pns.uniform_distribution, context=ctx)
+unnamed_transition_6 = pns.Transition(name=None, context=ctx)
+unnamed_transition_7 = pns.Transition(name=None, context=ctx)
 
 petri_net = \
-    PetriNet(
-        (Place('A', 8, context=ctx), Place('B', capacity=6, context=ctx),
-         Place('C', 10, context=ctx), Place('D', capacity=5, context=ctx), 'E',
+    pns.PetriNet(
+        (pns.Place('A', 8, context=ctx), pns.Place('B', capacity=6, context=ctx),
+         pns.Place('C', 10, context=ctx), pns.Place('D', capacity=5, context=ctx), 'E',
          unnamed_place_1, 'F', 'G', unnamed_place_2, unnamed_place_5, unnamed_place_6,
          unnamed_place_3, unnamed_place_4, 'H', 'I'),
         ('T1', unnamed_transition_1, unnamed_transition_2,
-         TransitionStochastic('TX', 0.3, context=ctx),
+         pns.TransitionStochastic('TX', 0.3, context=ctx),
          unnamed_transition_3, unnamed_transition_4,
          unnamed_transition_5, unnamed_transition_6,
          unnamed_transition_7),
@@ -40,7 +39,7 @@ petri_net = \
          (unnamed_place_2, unnamed_transition_4), (unnamed_place_2, unnamed_transition_5),
          (unnamed_transition_4, unnamed_place_5), (unnamed_transition_5, unnamed_place_6),
          (unnamed_place_3, unnamed_transition_6, 3), (unnamed_transition_6, 'H'),
-         Inhibitor(unnamed_place_3, unnamed_transition_7, context=ctx),
+         pns.Inhibitor(unnamed_place_3, unnamed_transition_7, context=ctx),
          (unnamed_place_4, unnamed_transition_7), (unnamed_transition_7, 'I')),
         context=ctx)
 
@@ -52,7 +51,7 @@ petri_net.step()
 petri_net_dump = dumps(petri_net.places, petri_net.transitions, petri_net.arcs)
 print(petri_net_dump)
 print('-----------------------------------------------')
-with open('sample_011_dump.json', 'w') as fout:
+with open('sample_011_dump_cython.json', 'w') as fout:
     fout.write(petri_net_dump)
 
 data = json.loads(petri_net_dump)
@@ -62,11 +61,11 @@ data['arcs'] = {int(k): v for k, v in data['arcs'].items()}
 print('petri_net_dump (edited):')
 pprint(data, indent=4, compact=True, width=200)
 
-ctx2 = new_context()
+ctx2 = pns.new_context()
 
 p2_places, p2_transitions, p2_arcs, _ = loads(petri_net_dump, ctx2)
 
-petri_net_from_dump = PetriNet(p2_places, p2_transitions, p2_arcs)
+petri_net_from_dump = pns.PetriNet(p2_places, p2_transitions, p2_arcs)
 
 print('petri_net_from_dump')
 petri_net_from_dump.print_all()
@@ -81,19 +80,19 @@ petri_net_from_dump.step()
 def compare_petri_nets(pn1, pn2):
     nets_difference = []
 
-    def make_lookup(pn: PetriNet):
+    def make_lookup(pn: pns.PetriNet):
         return {x.name: x for x in chain(pn.places, pn.transitions, pn.arcs)}
 
     def items_differ(x1, x2):
         if type(x1) != type(x2):
             return 'type_mismatch', x1.name, str(type(x1), '!=', str(type(x2)))
-        if type(x1) == Place:
+        if type(x1) == pns.Place:
             if x1.capacity != x2.capacity or x1.init_tokens != x2.init_tokens:
                 return (x1.name, 'place parameters mismatch',
                         (x1.capacity, x1.init_tokens),
                         '!=',
                         (x2.capacity, x2.init_tokens))
-        elif isinstance(x1, Transition):  # and subclasses
+        elif isinstance(x1, pns.Transition):  # and subclasses
             # inputs/outputs
             x1_sources = {arc.source.name for arc in x1.inputs}
             x2_sources = {arc.source.name for arc in x2.inputs}
@@ -108,7 +107,7 @@ def compare_petri_nets(pn1, pn2):
                         'transition has mismatched inputs/outputs',
                         ('bad inputs:', mismatched_sources),
                         ('bad outputs:', mismatched_targets))
-        elif isinstance(x1, (Arc, Inhibitor)):
+        elif isinstance(x1, (pns.Arc, pns.Inhibitor)):
             if x1.source.name != x2.source.name or x1.target.name != x2.target.name:
                 return (x1.name,
                         'arc/inhibitor source/target mismatched',

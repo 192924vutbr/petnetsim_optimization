@@ -1,14 +1,14 @@
 # doc/drawing/sample_006_timed.svg
 
-from petnetsim import *
+import petnetsim_opt as pns
 
 
 def run():
 
-    petri_net = PetriNet([Place('X', init_tokens=4), Place('Y', init_tokens=12), Place('Z', init_tokens=2),
+    petri_net = pns.PetriNet([pns.Place('X', init_tokens=4), pns.Place('Y', init_tokens=12), pns.Place('Z', init_tokens=2),
                           'A', 'B', 'C', 'D'],
-                         [TransitionTimed('T1', 10), TransitionTimed('T2', 5),
-                          TransitionTimed('T3', 1), 'T4'],
+                         [pns.TransitionTimed('T1', 10), pns.TransitionTimed('T2', 5),
+                          pns.TransitionTimed('T3', 1), 'T4'],
                          [('X', 'T1'), ('X', 'T2'), ('Y', 'T3'), ('Y', 'T4'), ('Z', 'T4'),
                           ('T1', 'A'), ('T2', 'B'), ('T3', 'C'), ('T4', 'D')])
 

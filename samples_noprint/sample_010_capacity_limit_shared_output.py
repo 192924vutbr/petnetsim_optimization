@@ -19,16 +19,16 @@ def run():
 
     max_steps = 100
 
-    print('--------------- step', petri_net.step_num)
-    petri_net.print_places()
+    #print('--------------- step', petri_net.step_num)
+    #petri_net.print_places()
 
     while not petri_net.ended and petri_net.step_num < max_steps:
         petri_net.step()
-        print('--------------- step', petri_net.step_num)
+        #print('--------------- step', petri_net.step_num)
         if len(petri_net.fired):
             print(' fired: ', end='')
             print(*(t.name for t in petri_net.fired), sep=', ')
-        petri_net.print_places()
+        #petri_net.print_places()
 
     if petri_net.ended:
         print('  -- breaking condition --')
@@ -38,6 +38,3 @@ def run():
     print('transitions stats')
     for t in petri_net.transitions:
         print('  '+t.name, t.fired_times, sep=': ')
-
-
-run()

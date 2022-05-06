@@ -1,11 +1,12 @@
 # doc/drawing/sample_004_stochastic.svg
 
-from petnetsim import *
 
+import petnetsim_opt as pns
 
 def run():
-    petri_net = PetriNet([Place('Z', init_tokens=10000), 'A', 'B'],
-                         [TransitionStochastic('T30', 0.3), TransitionStochastic('T70', 0.7)],
+
+    petri_net = pns.PetriNet([pns.Place('Z', init_tokens=100), 'A', 'B'],
+                         [pns.TransitionStochastic('T30', 0.3), pns.TransitionStochastic('T70', 0.7)],
                          [('Z', 'T30'), ('Z', 'T70'), ('T30', 'A'), ('T70', 'B')])
 
     print('conflict groups:', petri_net.conflict_groups_str)
@@ -16,7 +17,7 @@ def run():
 
     petri_net.reset()
 
-    max_steps = 100000
+    max_steps = 100
 
     print('--------------- step', petri_net.step_num)
     petri_net.print_places()

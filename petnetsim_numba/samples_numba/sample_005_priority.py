@@ -1,6 +1,7 @@
 # doc/drawing/sample_005_priority.svg
 
-from petnetsim import *
+from petnetsim_numba import *
+
 
 
 def run():

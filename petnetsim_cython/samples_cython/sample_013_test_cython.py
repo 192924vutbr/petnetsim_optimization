@@ -1,8 +1,7 @@
 
 # doc/drawing/sample_001_basic.svg
 
-from petnetsim import *
-
+from petnetsim_cython import *
 
 def run():
     empty_net = PetriNet([], [], [])
@@ -24,7 +23,7 @@ def run():
 
     petri_net.reset()
 
-    max_steps = 100
+    max_steps = 10000
 
     print('--------------- step', petri_net.step_num)
     petri_net.print_places()
@@ -40,3 +39,13 @@ def run():
         print('  max steps reached')
 
 run()
+
+
+import time
+start_time = time.time()
+
+run()
+Time_1 = time.time() - start_time
+print("--- %s seconds ---" % (time.time() - start_time))
+print(sys.version)
+
