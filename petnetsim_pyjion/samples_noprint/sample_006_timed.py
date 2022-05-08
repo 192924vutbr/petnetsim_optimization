@@ -1,7 +1,7 @@
 # doc/drawing/sample_006_timed.svg
 
 from petnetsim_pyjion import *
-
+import pyjion; pyjion.enable()
 
 def run():
 

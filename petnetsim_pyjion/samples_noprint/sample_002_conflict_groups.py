@@ -1,7 +1,7 @@
 # doc/drawing/sample_002_conflict_groups.svg
 
 from petnetsim_pyjion import *
-
+import pyjion; pyjion.enable()
 def run():
     petri_net = PetriNet([Place('A', init_tokens=1000),
                           Place('B', capacity=2000),

@@ -3,7 +3,7 @@ from samples_noprint import sample_001_basic_edit, sample_002_conflict_groups,sa
 import time
 import numpy as np
 import csv
-
+import pyjion; pyjion.enable()
 
 cyc_num = 20
 i=1

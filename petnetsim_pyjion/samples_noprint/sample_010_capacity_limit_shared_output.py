@@ -1,7 +1,7 @@
 # doc/drawing/sample_010_capacity_limit_shared.svg
 
 from petnetsim_pyjion import *
-
+import pyjion; pyjion.enable()
 
 def run():
 
