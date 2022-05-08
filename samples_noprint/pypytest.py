@@ -1,6 +1,7 @@
 import time
 from numba import jit
 
+hasattr(sys, "pyston_version_info")
 start_time = time.time()
 
 @jit(nopython=True)

@@ -5,7 +5,7 @@ import numpy as np
 import csv
 
 
-cyc_num = 20
+cyc_num = 21
 i=1
 Time_001 = []
 while i < cyc_num:
@@ -120,7 +120,7 @@ Python_TIME.append(Time_010)
 Python_TIME.append(Time_011)
 Python_TIME.append(Time_012)
 
-np.savetxt("PyPy_print.csv",
+np.savetxt("Python_ubuntu_noprint.csv",
            Python_TIME,
            delimiter =", ",
            fmt ='% s')
