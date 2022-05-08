@@ -1,7 +1,7 @@
 # doc/drawing/sample_004_stochastic.svg
 
 from petnetsim_pyjion import *
-
+import pyjion; pyjion.enable()
 
 def run():
     petri_net = PetriNet([Place('Z', init_tokens=10000), 'A', 'B'],
