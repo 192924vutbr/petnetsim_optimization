@@ -1,11 +1,11 @@
 
-from samples_noprint import sample_001_basic_edit, sample_002_conflict_groups,sample_003_inhibitors_edit, sample_004_stochastic, sample_005_priority, sample_006_timed, sample_007_deadlock, sample_008_deadlock_priority, sample_009_deadlock_P1watchdog, sample_010_capacity_limit_shared_output, sample_011_json, sample_012_netclone
+from samples_print import sample_001_basic_edit, sample_002_conflict_groups,sample_003_inhibitors_edit, sample_004_stochastic, sample_005_priority, sample_006_timed, sample_007_deadlock, sample_008_deadlock_priority, sample_009_deadlock_P1watchdog, sample_010_capacity_limit_shared_output, sample_011_json, sample_012_netclone
 import time
 import numpy as np
 import csv
 
 
-cyc_num = 20
+cyc_num = 21
 i=1
 Time_001 = []
 while i < cyc_num:
@@ -120,7 +120,7 @@ Python_TIME.append(Time_010)
 Python_TIME.append(Time_011)
 Python_TIME.append(Time_012)
 
-np.savetxt("PyPy_print.csv",
+np.savetxt("Pyston_ubuntu_print.csv",
            Python_TIME,
            delimiter =", ",
            fmt ='% s')
