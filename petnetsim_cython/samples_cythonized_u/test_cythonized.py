@@ -17,19 +17,19 @@ cyc_num = 21
 i=1
 Time_001 = []
 while i < cyc_num:
-    start_time = time.time()
-    sample_001.run()
+    start_time = time.perf_counter()
+    sample_009.run()
 
-    Time_001.append(time.time() - start_time)
+    Time_001.append(time.perf_counter() - start_time)
     i = i+1
 
 i=1
 Time_002 = []
 while i < cyc_num:
-    start_time = time.time()
-    sample_002.run()
+    start_time = time.perf_counter()
+    sample_010.run()
 
-    Time_002.append(time.time() - start_time)
+    Time_002.append(time.perf_counter() - start_time)
     i = i+1
 
 Time_003 = []
