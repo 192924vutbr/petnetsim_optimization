@@ -3,9 +3,9 @@
 from petnetsim import *
 import time
 
-import pyjion; pyjion.enable()
 
-petri_net_init = PetriNet([Place('Z', init_tokens=100000), 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'],
+
+petri_net_init = PetriNet([Place('Z', init_tokens=10000), 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'],
                          [TransitionStochastic('T1', 3), TransitionStochastic('T2', 49),
                           TransitionStochastic('T3', 7), TransitionStochastic('T4', 5),
                           TransitionStochastic('T5', 6), TransitionStochastic('T6', 20),
@@ -71,8 +71,8 @@ def run():
         petri_net.print_places()
 
 
-start_time = time.time()
+start_time = time.perf_counter()
 
 run()
 
-print(time.time()-start_time)
+print(time.perf_counter()-start_time)
