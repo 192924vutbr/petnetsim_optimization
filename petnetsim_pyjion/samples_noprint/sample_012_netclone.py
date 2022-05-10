@@ -1,7 +1,7 @@
 from petnetsim_pyjion import PetriNet, Place, Transition, new_context
 import petnetsim_pyjion.json_io
 
-
+import pyjion; pyjion.enable()
 def run():
     subnet_ctx = new_context()
     with open('sample_012_netclone.json') as f:

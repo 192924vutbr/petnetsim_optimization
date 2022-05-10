@@ -1,7 +1,7 @@
 # doc/drawing/sample_003_inhibitors.svg
 
 from petnetsim_pyjion import *
-
+import pyjion; pyjion.enable()
 
 def run():
     C = Place('C')
