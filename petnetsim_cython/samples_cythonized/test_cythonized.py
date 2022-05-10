@@ -13,12 +13,12 @@ import sample_011
 
 import time
 
-cyc_num = 20
+cyc_num = 21
 i=1
 Time_001 = []
 while i < cyc_num:
     start_time = time.time()
-    sample_010.run()
+    sample_001.run()
 
     Time_001.append(time.time() - start_time)
     i = i+1
@@ -27,7 +27,7 @@ i=1
 Time_002 = []
 while i < cyc_num:
     start_time = time.time()
-    #sample_011.run()
+    sample_002.run()
 
     Time_002.append(time.time() - start_time)
     i = i+1

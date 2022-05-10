@@ -1,7 +1,7 @@
 # doc/drawing/sample_001_basic.svg
 
 from petnetsim_pyjion import *
-
+import pyjion; pyjion.enable()
 def run():
     empty_net = PetriNet([], [], [])
     while not empty_net.ended and empty_net.step_num < 100:

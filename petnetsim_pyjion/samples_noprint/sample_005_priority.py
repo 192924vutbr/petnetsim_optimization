@@ -1,7 +1,7 @@
 # doc/drawing/sample_005_priority.svg
 
 from petnetsim_pyjion import *
-
+import pyjion; pyjion.enable()
 
 def run():
 

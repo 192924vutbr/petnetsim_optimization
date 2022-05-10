@@ -3,7 +3,7 @@
 import itertools
 
 from petnetsim_pyjion import *
-
+import pyjion; pyjion.enable()
 
 def run():
 

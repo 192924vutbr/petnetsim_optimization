@@ -5,8 +5,8 @@ import numpy as np
 import csv
 
 
-cyc_num = 20
-i=1
+cyc_num = 21
+i=0
 Time_001 = []
 while i < cyc_num:
     start_time = time.time()
@@ -14,7 +14,7 @@ while i < cyc_num:
     sample_001_basic_edit.run()
     Time_001.append(time.time() - start_time)
     i = i+1
-i=1
+i=0
 Time_002 = []
 
 while i < cyc_num:
@@ -23,7 +23,7 @@ while i < cyc_num:
     sample_002_conflict_groups.run()
     Time_002.append(time.time() - start_time)
     i = i+1
-i=1
+i=0
 Time_003 = []
 while i < cyc_num:
     start_time = time.time()
@@ -31,7 +31,7 @@ while i < cyc_num:
     sample_003_inhibitors_edit.run()
     Time_003.append(time.time() - start_time)
     i = i + 1
-i=1
+i=0
 Time_004 = []
 while i < cyc_num:
     start_time = time.time()
@@ -39,7 +39,7 @@ while i < cyc_num:
     sample_004_stochastic.run()
     Time_004.append(time.time() - start_time)
     i = i + 1
-i=1
+i=0
 Time_005 = []
 while i < cyc_num:
     start_time = time.time()
@@ -47,7 +47,7 @@ while i < cyc_num:
     sample_005_priority.run()
     Time_005.append(time.time() - start_time)
     i = i + 1
-i=1
+i=0
 Time_006 = []
 while i < cyc_num:
     start_time = time.time()
@@ -55,7 +55,7 @@ while i < cyc_num:
     sample_006_timed.run()
     Time_006.append(time.time() - start_time)
     i = i + 1
-i=1
+i=0
 Time_007 = []
 while i < cyc_num:
     start_time = time.time()
@@ -63,7 +63,7 @@ while i < cyc_num:
     sample_007_deadlock.run()
     Time_007.append(time.time() - start_time)
     i = i + 1
-i=1
+i=0
 Time_008 = []
 while i < cyc_num:
     start_time = time.time()
@@ -71,7 +71,7 @@ while i < cyc_num:
     sample_008_deadlock_priority.run()
     Time_008.append(time.time() - start_time)
     i = i + 1
-i=1
+i=0
 Time_009 = []
 while i < cyc_num:
     start_time = time.time()
@@ -79,7 +79,7 @@ while i < cyc_num:
     sample_009_deadlock_P1watchdog.run()
     Time_009.append(time.time() - start_time)
     i = i + 1
-i=1
+i=0
 Time_010 = []
 while i < cyc_num:
     start_time = time.time()
@@ -88,7 +88,7 @@ while i < cyc_num:
     Time_010.append(time.time() - start_time)
     i = i + 1
 
-i=1
+i=0
 Time_011 = []
 while i < cyc_num:
     start_time = time.time()
@@ -97,7 +97,7 @@ while i < cyc_num:
     Time_011.append(time.time() - start_time)
     i = i + 1
 
-i=1
+i=0
 Time_012 = []
 while i < cyc_num:
     start_time = time.time()
@@ -105,7 +105,7 @@ while i < cyc_num:
     sample_012_netclone.run()
     Time_012.append(time.time() - start_time)
     i = i + 1
-fields = ["Time_001", "Time_002", "Time_003", "Time_004", "Time_005", "Time_006", "Time_007", "Time_008", "Time_009", "Time_010", "Time_011," "Time_012"]
+
 Python_TIME = []
 Python_TIME.append(Time_001)
 Python_TIME.append(Time_002)
@@ -120,7 +120,7 @@ Python_TIME.append(Time_010)
 Python_TIME.append(Time_011)
 Python_TIME.append(Time_012)
 
-np.savetxt("PyPy_print.csv",
+np.savetxt("Python_ubuntu_noprint.csv",
            Python_TIME,
            delimiter =", ",
            fmt ='% s')

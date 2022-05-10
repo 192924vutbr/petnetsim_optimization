@@ -4,7 +4,7 @@ from petnetsim_pyjion.json_io import loads, dumps
 from pprint import pprint
 from itertools import chain
 import json
-
+import pyjion; pyjion.enable()
 def run():
     ctx = new_context()
 
