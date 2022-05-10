@@ -3,9 +3,9 @@
 from petnetsim import *
 import time
 
+#import pyjion; pyjion.enable()
 
-
-petri_net_init = PetriNet([Place('Z', init_tokens=10000), 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'],
+petri_net_init = PetriNet([Place('Z', init_tokens=100000), 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'],
                          [TransitionStochastic('T1', 3), TransitionStochastic('T2', 49),
                           TransitionStochastic('T3', 7), TransitionStochastic('T4', 5),
                           TransitionStochastic('T5', 6), TransitionStochastic('T6', 20),
@@ -70,9 +70,17 @@ def run():
         print(t.name, t.fired_times, sep=': ')
         petri_net.print_places()
 
+cyc_num = 21
+i=1
+Time_001 = []
+while i < cyc_num:
+    start_time = time.perf_counter()
 
-start_time = time.perf_counter()
+    run()
+    Time_001.append(time.perf_counter() - start_time)
+    i = i+1
 
-run()
-
-print(time.perf_counter()-start_time)
+np.savetxt("Big4_python__print.csv",
+           Time_001,
+           delimiter =", ",
+           fmt ='% s')
