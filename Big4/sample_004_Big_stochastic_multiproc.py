@@ -2,7 +2,7 @@
 
 from petnetsim import *
 import time
-
+import multiprocessing
 
 #import pyjion; pyjion.enable()
 
@@ -58,8 +58,8 @@ def run():
 
     while not petri_net.ended and petri_net.step_num < max_steps:
         petri_net.step()
-        print('--------------- step', petri_net.step_num)
-        petri_net.print_places()
+        #print('--------------- step', petri_net.step_num)
+        #petri_net.print_places()
 
     if petri_net.ended:
         print('  breaking condition')
@@ -71,9 +71,9 @@ def run():
         print(t.name, t.fired_times, sep=': ')
         petri_net.print_places()
 
-cyc_num = 20
-
-i=0
+cyc_num = 5
+"""""
+i=1
 Time_001 = []
 while i < cyc_num:
     start_time = time.perf_counter()
@@ -81,8 +81,23 @@ while i < cyc_num:
     run()
     Time_001.append(time.perf_counter() - start_time)
     i = i+1
+"""""
 
+start_time = time.perf_counter()
+processes = []
+for _ in range(20):
+    p = multiprocessing.Process(target=run)
+    p.start()
+    processes.append(p)
+
+for process in processes:
+    process.join()
+
+print(time.perf_counter() - start_time)
+
+"""""
 np.savetxt("Big4_pyston__print.csv",
            Time_001,
            delimiter =", ",
            fmt ='% s')
+"""""

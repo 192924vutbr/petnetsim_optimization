@@ -2,7 +2,7 @@
 
 from petnetsim import *
 import time
-
+import concurrent.futures
 
 #import pyjion; pyjion.enable()
 
@@ -58,8 +58,8 @@ def run():
 
     while not petri_net.ended and petri_net.step_num < max_steps:
         petri_net.step()
-        print('--------------- step', petri_net.step_num)
-        petri_net.print_places()
+        #print('--------------- step', petri_net.step_num)
+        #petri_net.print_places()
 
     if petri_net.ended:
         print('  breaking condition')
@@ -71,18 +71,14 @@ def run():
         print(t.name, t.fired_times, sep=': ')
         petri_net.print_places()
 
-cyc_num = 20
 
-i=0
-Time_001 = []
-while i < cyc_num:
-    start_time = time.perf_counter()
 
-    run()
-    Time_001.append(time.perf_counter() - start_time)
-    i = i+1
+start_time = time.perf_counter()
 
-np.savetxt("Big4_pyston__print.csv",
-           Time_001,
-           delimiter =", ",
-           fmt ='% s')
+with concurrent.futures.ProcessPoolExecutor() as executor:
+    results = [executor.submit(run) for _ in range(20)]
+
+    for f in concurrent.futures.as_completed(results):
+        print(f.result())
+
+print(time.perf_counter() - start_time)
