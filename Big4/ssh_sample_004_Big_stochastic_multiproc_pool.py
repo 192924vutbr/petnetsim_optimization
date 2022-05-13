@@ -645,7 +645,7 @@ def run():
         petri_net.print_places()
 
 
-cyc_num = 20
+cyc_num = 16
 
 start_time = time.perf_counter()
 
@@ -655,11 +655,11 @@ with concurrent.futures.ProcessPoolExecutor() as executor:
     for f in concurrent.futures.as_completed(results):
         print(f.result())
 
-print(time.perf_counter() - start_time)
-multi_time = time.perf_counter() - start_time
+
+multi_time16 = time.perf_counter() - start_time
 
 
-
+"""""
 i=0
 Time_001 = []
 start_time_normal = time.perf_counter()
@@ -669,6 +669,147 @@ while i < cyc_num:
     run()
     Time_001.append(time.perf_counter() - start_time)
     i = i+1
-time_normal = time.perf_counter()-start_time_normal
-print(time_normal, multi_time)
+time_normal16 = time.perf_counter()-start_time_normal
+print("16: CPython, Multi: ", time_normal16, multi_time16)
+"""""
+cyc_num = 32
 
+start_time = time.perf_counter()
+
+with concurrent.futures.ProcessPoolExecutor() as executor:
+    results = [executor.submit(run) for _ in range(cyc_num)]
+
+    for f in concurrent.futures.as_completed(results):
+        print(f.result())
+
+
+multi_time32 = time.perf_counter() - start_time
+
+
+"""""
+i=0
+Time_001 = []
+start_time_normal = time.perf_counter()
+while i < cyc_num:
+    start_time = time.perf_counter()
+
+    run()
+    Time_001.append(time.perf_counter() - start_time)
+    i = i+1
+time_normal32 = time.perf_counter()-start_time_normal
+print("16: CPython, Multi: ", time_normal32, multi_time32)
+"""""
+cyc_num = 64
+
+start_time = time.perf_counter()
+
+with concurrent.futures.ProcessPoolExecutor() as executor:
+    results = [executor.submit(run) for _ in range(cyc_num)]
+
+    for f in concurrent.futures.as_completed(results):
+        print(f.result())
+
+
+multi_time64 = time.perf_counter() - start_time
+
+
+"""""
+i=0
+Time_001 = []
+start_time_normal = time.perf_counter()
+while i < cyc_num:
+    start_time = time.perf_counter()
+
+    run()
+    Time_001.append(time.perf_counter() - start_time)
+    i = i+1
+time_normal64 = time.perf_counter()-start_time_normal
+print("16: CPython, Multi: ", time_normal64, multi_time64)
+"""""
+cyc_num = 128
+
+start_time = time.perf_counter()
+
+with concurrent.futures.ProcessPoolExecutor() as executor:
+    results = [executor.submit(run) for _ in range(cyc_num)]
+
+    for f in concurrent.futures.as_completed(results):
+        print(f.result())
+
+
+multi_time128 = time.perf_counter() - start_time
+
+
+"""""
+i=0
+Time_001 = []
+start_time_normal = time.perf_counter()
+while i < cyc_num:
+    start_time = time.perf_counter()
+
+    run()
+    Time_001.append(time.perf_counter() - start_time)
+    i = i+1
+time_normal128 = time.perf_counter()-start_time_normal
+print("16: CPython, Multi: ", time_normal64, multi_time64)
+"""""
+cyc_num = 256
+
+start_time = time.perf_counter()
+
+with concurrent.futures.ProcessPoolExecutor() as executor:
+    results = [executor.submit(run) for _ in range(cyc_num)]
+
+    for f in concurrent.futures.as_completed(results):
+        print(f.result())
+
+
+multi_time256 = time.perf_counter() - start_time
+
+
+"""""
+i=0
+Time_001 = []
+start_time_normal = time.perf_counter()
+while i < cyc_num:
+    start_time = time.perf_counter()
+
+    run()
+    Time_001.append(time.perf_counter() - start_time)
+    i = i+1
+time_normal256 = time.perf_counter()-start_time_normal
+print("16: CPython, Multi: ", time_normal64, multi_time64)
+"""""
+cyc_num = 512
+
+start_time = time.perf_counter()
+
+with concurrent.futures.ProcessPoolExecutor() as executor:
+    results = [executor.submit(run) for _ in range(cyc_num)]
+
+    for f in concurrent.futures.as_completed(results):
+        print(f.result())
+
+
+multi_time512 = time.perf_counter() - start_time
+
+
+"""""
+i=0
+Time_001 = []
+start_time_normal = time.perf_counter()
+while i < cyc_num:
+    start_time = time.perf_counter()
+
+    run()
+    Time_001.append(time.perf_counter() - start_time)
+    i = i+1
+time_normal512 = time.perf_counter()-start_time_normal
+
+"""""
+print("16: CPython, Multi: ", "NA", multi_time16)
+print("32: CPython, Multi: ", "NA", multi_time32)
+print("64: CPython, Multi: ", "NA", multi_time64)
+print("128: CPython, Multi: ", "NA", multi_time128)
+print("256: CPython, Multi: ", "NA", multi_time256)
+print("512: CPython, Multi: ", "NA", multi_time512)
